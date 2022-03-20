@@ -20,6 +20,8 @@ export class AppComponent {
   showFiller = false;
   selectedMenu:any='Home';
   @ViewChild('content', {static: false}) el!: ElementRef;
+  j:number = 0;
+  textvalue:string = '';
 
   goTo(paramText:string){
     this.selectedMenu = paramText
@@ -38,10 +40,11 @@ export class AppComponent {
     });
   }
 
-  public typeNote() {
+  public typeNote(nr:number) {
     let container3 = Array.from(document.getElementsByClassName('container3') as HTMLCollectionOf<HTMLElement>)[0];
     if(container3.style.display == 'none'){
       container3.style.display = 'block';
+      this.j = nr;
     } else {
       container3.style.display = 'none';
     }
@@ -51,6 +54,7 @@ export class AppComponent {
     let random_color = ["#c2ff3d","#ff3de8","#3dc2ff","#04e022","#bc83e6","#ebb328"];
     let random_margin = ["-5px", "1px", "5px", "10px", "7px"];
     let random_rotate = ["rotate(3deg)", "rotate(1deg)", "rotate(-1deg)", "rotate(-3deg)", "rotate(-5deg)", "rotate(-8deg)"];
+    let container3 = Array.from(document.getElementsByClassName('container3') as HTMLCollectionOf<HTMLElement>)[0];
     let container2 = Array.from(document.getElementsByClassName('card-elements-notes') as HTMLCollectionOf<HTMLElement>)[i];
     let noteText = (document.getElementById('note-text') as HTMLInputElement).value;
     let node0 = document.createElement("div");
@@ -79,6 +83,12 @@ export class AppComponent {
     node0.addEventListener("dblclick", function(){
       node0.remove();
     })
+
+    container3.style.display = 'none';
+  }
+
+  public resetValue(){
+    (document.getElementById('note-text') as HTMLInputElement).value = "";
   }
 
   tiles: Tile[] = [
