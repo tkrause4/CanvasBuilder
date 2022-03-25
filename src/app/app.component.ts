@@ -62,7 +62,7 @@ export class AppComponent {
 
     node1.innerHTML = noteText;
 
-    node1.setAttribute("style", "width:75px; height:75px; font-size:10px; padding:5px; margin-top:5px; overflow:hidden; box-shadow:0px 10px 24px 0px rgba(0,0,0,0.75)");
+    node1.setAttribute("style", "width:75px; height:75px; font-size:10px; padding:5px; margin-top:5px; overflow:hidden; box-shadow:0px 10px 24px 0px rgba(0,0,0,0.75);");
 
     node1.style.margin = random_margin[Math.floor(Math.random() * random_margin.length)];
     node1.style.transform = random_rotate[Math.floor(Math.random() * random_rotate.length)];
@@ -92,14 +92,14 @@ export class AppComponent {
   }
 
   tiles: Tile[] = [
-    {text: 'Key Partners', cols: 2, rows: 4, color: 'lightgray'},
-    {text: 'Key Activities', cols: 2, rows: 2, color: 'lightgray'},
-    {text: 'Value Proposition', cols: 2, rows: 4, color: 'lightgray'},
-    {text: 'Customers Relationships', cols: 2, rows: 2, color: 'lightgray'},
-    {text: 'Customer Segments', cols: 2, rows: 4, color: 'lightgray'},
-    {text: 'Key Ressources', cols: 2, rows: 2, color: 'lightgray'},
-    {text: 'Channels', cols: 2, rows: 2, color: 'lightgray'},
-    {text: 'Cost Structure', cols: 5, rows: 2, color: 'lightgray'},
-    {text: 'Revenue Streams', cols: 5, rows: 2, color: 'lightgray'},
+    {text: 'Key Partners', cols: 2, rows: 4, color: 'white'},
+    {text: 'Key Activities', cols: 2, rows: 2, color: 'white'},
+    {text: 'Value Proposition', cols: 2, rows: 4, color: 'white'},
+    {text: 'Customers Relationships', cols: 2, rows: 2, color: 'white'},
+    {text: 'Customer Segments', cols: 2, rows: 4, color: 'white'},
+    {text: 'Key Ressources', cols: 2, rows: 2, color: 'white'},
+    {text: 'Channels', cols: 2, rows: 2, color: 'white'},
+    {text: 'Cost Structure', cols: 5, rows: 2, color: 'white'},
+    {text: 'Revenue Streams', cols: 5, rows: 2, color: 'white'},
   ];
 }

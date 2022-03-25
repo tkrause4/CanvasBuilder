@@ -2,6 +2,10 @@ mat-grid-tile {
   border: solid 1px #000;
 }
 
+.side-menu-content {
+  width: 90%;
+}
+
 .canvas {
   margin-left: 10px;
   margin-right: 10px;
@@ -89,10 +93,6 @@ mat-grid-tile {
 
 .row {
   display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  margin-top: 20px;
-  margin-left: 5%;
 }
 
 .background{
