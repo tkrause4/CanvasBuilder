@@ -2,16 +2,25 @@ mat-grid-tile {
   border: solid 1px #000;
 }
 
+mat-drawer-container {
+  height: 100%;
+}
+
 .side-menu-content {
   width: 90%;
 }
 
 .canvas {
-  margin-left: 10px;
+  margin-left: 40px;
   margin-right: 10px;
   margin-top: 50px;
+  margin-right: 100px;
   width: 1700px;
   display: inline-block;
+}
+
+.row {
+  margin-bottom: 30px;
 }
 
 .card-elements {
@@ -82,19 +91,6 @@ mat-grid-tile {
   width: 35px;
 }
 
-/*
-.tabs {
-  font-size: 22px;
-  font-weight: 600;
-  text-transform: capitalize;
-  margin-top: 50px;
-}
-*/
-
-.row {
-  display: flex;
-}
-
 .background{
   background: #c68c53a8;
   font-family: 'Architects Daughter';
@@ -144,8 +140,27 @@ svg {
   top: 4%;
 }
 
+#add-icon {
+  position: absolute;
+  right: 7px;
+  top: 5px;
+}
+
+#dl-button {
+margin-left: 40px;
+margin-top: 10px;
+}
+
+mat-flat-button {
+  width: 50px;
+}
+
 #x-icon {
   position: absolute;
   right: 5%;
   top: 4%;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
 }
