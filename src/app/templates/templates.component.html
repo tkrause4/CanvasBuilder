@@ -1,3 +1,20 @@
-<div class="row" style="height: 950px;">
-    <p>templates works!</p>  
+<div class="content">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let num of [1,2,3,4,5,6,7]">
+      <mat-card class="mat-elevation-z4" >
+        <mat-card-header>
+          <mat-card-title>Canvas Template {{num}}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="./../assets/images/empty_content_strategy_canvas.png">
+        <mat-card-content>
+          <p>
+            This is Canvas Template fill Text.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-flat-button color="primary">Canvas erstellen</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
   </div>
+</div>
