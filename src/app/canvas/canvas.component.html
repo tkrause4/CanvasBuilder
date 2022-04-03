@@ -1,0 +1,38 @@
+<div class="row">
+    <div>
+      <div id="content" class="canvas">
+        <mat-grid-list cols="10" rowHeight="10:8" gutterSize="0" guttercolor="black">
+          <mat-grid-tile
+            *ngFor="let tile of tiles; let i = index"
+            [colspan]="tile.cols"
+            [rowspan]="tile.rows"
+            [style.background]="tile.color">
+            <mat-card class="card-elements">
+              <mat-card-title class="card-elements-title">
+                {{tile.text}}
+                <button mat-icon-button id="add-icon" color="primary"(click)="typeNote(i)" >
+                  <mat-icon>add_circle_outline</mat-icon>
+                </button>
+              </mat-card-title>
+              <mat-card-content class="card-elements-notes"></mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list> 
+      </div>
+      <button mat-flat-button id="dl-button" color="primary" (click)="makepdf()">Download</button>
+    </div>
+  </div>
+  
+  <div class="test-container">
+    <div class="container3">
+      <form>
+        <textarea id="note-text" placeholder="Note..." maxlength="96"></textarea>
+        <button id="check-icon" mat-icon-button color="primary" (click)="createNote(j); resetValue()">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button id="x-icon" mat-icon-button color="primary" (click)="typeNote(0)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </form>
+    </div>
+  </div>

@@ -1,64 +1,11 @@
 <div>
-  <mat-toolbar>
-    <button mat-icon-button class="example-icon" (click)="drawer.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>Canvas Builder</span>
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon">
-    <mat-icon>share</mat-icon>
-  </button>
-  </mat-toolbar>
-
-  <mat-drawer-container autosize>
-    <mat-drawer #drawer mode="over">
-      Menu Content
-    </mat-drawer>
-  
+  <app-toolbar [inputSideNav]="sideNav"></app-toolbar>
+  <mat-sidenav-container autosize>
+    <mat-sidenav #sideNav mode="over">
+      <app-sidenav-menu></app-sidenav-menu>
+    </mat-sidenav>
     <div>
-      <div class="row">
-        <div>
-          <div id="content" class="canvas">
-            <mat-grid-list cols="10" rowHeight="10:8" gutterSize="0" guttercolor="black">
-              <mat-grid-tile
-                *ngFor="let tile of tiles; let i = index"
-                [colspan]="tile.cols"
-                [rowspan]="tile.rows"
-                [style.background]="tile.color">
-                <mat-card class="card-elements">
-                  <mat-card-title class="card-elements-title">
-                    {{tile.text}}
-                    <button mat-icon-button id="add-icon" color="primary"(click)="typeNote(i)" >
-                      <mat-icon>add_circle_outline</mat-icon>
-                    </button>
-                  </mat-card-title>
-                  <mat-card-content class="card-elements-notes"></mat-card-content>
-                </mat-card>
-              </mat-grid-tile>
-            </mat-grid-list> 
-          </div>
-          <button mat-flat-button id="dl-button" color="primary" (click)="makepdf()">Download</button>
-        </div>
-      </div>
-      
-      <div class="test-container">
-        <div class="container3">
-          <form>
-            <textarea id="note-text" placeholder="Note..." maxlength="96"></textarea>
-            <svg id="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16" (click)="createNote(j); resetValue()">
-              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-              <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
-            </svg>
-            <svg id="x-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16" (click)="typeNote(0)">
-              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-            </svg>
-          </form>
-        </div>
-      </div>
+      <router-outlet></router-outlet>
     </div>
-  </mat-drawer-container>
+  </mat-sidenav-container>
 </div>

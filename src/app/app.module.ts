@@ -16,11 +16,22 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { SidenavMenuComponent } from './sidenav-menu/sidenav-menu.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { CanvasComponent } from './canvas/canvas.component';
+import { CustomLayoutsComponent } from './custom-layouts/custom-layouts.component';
+import { TemplatesComponent } from './templates/templates.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SidenavMenuComponent,
+    ToolbarComponent,
+    CanvasComponent,
+    CustomLayoutsComponent,
+    TemplatesComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +48,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatCardModule,
     DragDropModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    FlexLayoutModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
