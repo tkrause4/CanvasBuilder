@@ -1,0 +1,12 @@
+<div class="menu-box">
+  <div class="side-menu-list">
+    <ul class="menu-items">
+      <li (click)="goTo('Home')" [ngClass]="{'onActive':selectedMenu == 'Home'}"><i class="fa fa-home"></i>Home</li>
+      <li (click)="goTo('Profile')" [ngClass]="{'onActive':selectedMenu == 'Profile'}"><i class="fa fa-user-circle"></i>Canvases</li>
+      <li (click)="goTo('Contact')" [ngClass]="{'onActive':selectedMenu == 'Contact'}"><i class="fa fa-volume-control-phone"></i>Layouts
+      </li>
+      <li (click)="goTo('Products')" [ngClass]="{'onActive':selectedMenu == 'Products'}"><i class="fa fa-shopping-cart"></i>Sammlung</li>
+      <li (click)="goTo('Login')" [ngClass]="{'onActive':selectedMenu == 'Login'}"><i class="fa fa-unlock-alt mr-2"></i>Login</li>
+    </ul>
+  </div>
+</div>

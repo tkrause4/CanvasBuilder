@@ -1,0 +1,8 @@
+<div
+  *ngFor="let note of tileNotes" class="note"
+  [style.background-color]=note.styles.color
+  [style.margin]=note.styles.margin
+  [style.transform]=note.styles.rotate
+>
+  <h1> {{note.text}}</h1>
+</div>
