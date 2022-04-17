@@ -3,24 +3,27 @@ mat-grid-tile {
   }
 
 .canvas {
-    margin-left: 40px;
-    margin-right: 10px;
-    margin-top: 50px;
-    margin-right: 100px;
-    width: 1700px;
+    margin: 1rem;
+    width: calc(100% - 2rem);
     display: inline-block;
 }
 
 .row {
     margin-bottom: 30px;
 }
-
+.mat-card-title{
+    display: block;
+    margin-bottom: 8px;
+    position: fixed;
+}
 .card-elements {
     width: 100%;
-    height: 100%;
+    height: 99%;
     font-size: 10px;
     background-color: white;
     color: black;
+    overflow-y: hidden;
+    overflow-x: auto;
 }
 
 .card-elements-title {
@@ -32,13 +35,7 @@ mat-grid-tile {
     right: 17%;
     top: 4%;
 }
-  
-#add-icon {
-    position: absolute;
-    right: 7px;
-    top: 5px;
-}
-  
+
 #dl-button {
   margin-left: 40px;
   margin-top: 10px;
@@ -53,32 +50,3 @@ mat-flat-button {
     right: 5%;
     top: 4%;
 }
-
-.card-elements-notes {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    margin-top: 20px;
-    margin-left: 5%;
-}
-  
-.container3 {
-    display: none;
-    position: absolute;
-    top: 26%;
-    left: 40%;
-}
-  
-textarea {
-    box-shadow: 10px 10px 24px 0px rgba(0, 0, 0, 0.75);
-    outline: none;
-    border: none;
-    width: 250px;
-    height: 250px;
-    padding: 40px 25px 25px 25px;
-}
-
-.test-container {
-    width: 95%;
-    margin: auto;
-  }

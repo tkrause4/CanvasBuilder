@@ -1,37 +1,45 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { SidenavMenuComponent } from './sidenav-menu/sidenav-menu.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
 import { CanvasComponent } from './canvas/canvas.component';
+import { CreateNoteDialogComponent } from './create-note-dialog/create-note-dialog.component';
 import { CustomLayoutsComponent } from './custom-layouts/custom-layouts.component';
+import { MenuComponent } from './menu/menu.component';
+import { SidenavMenuComponent } from './sidenav-menu/sidenav-menu.component';
 import { TemplatesComponent } from './templates/templates.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { NoteListComponent } from './note-list/note-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    MenuComponent,
     SidenavMenuComponent,
     ToolbarComponent,
     CanvasComponent,
     CustomLayoutsComponent,
-    TemplatesComponent
+    TemplatesComponent,
+    CreateNoteDialogComponent,
+    NoteListComponent
   ],
   imports: [
     BrowserModule,
@@ -49,10 +57,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     DragDropModule,
     MatFormFieldModule,
     MatSelectModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatTooltipModule,
+    MatDialogModule,
+    ReactiveFormsModule
 
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
