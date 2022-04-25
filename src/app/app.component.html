@@ -4,8 +4,12 @@
     <mat-sidenav #sideNav mode="over">
       <app-sidenav-menu></app-sidenav-menu>
     </mat-sidenav>
-    <div>
+    <div *ngIf="localTimestamp">
       <router-outlet></router-outlet>
+      <button (click)="onButtonClick()">
+        Get Time
+      </button>
+      <span>{{ localTimestamp.time }}</span>
     </div>
   </mat-sidenav-container>
 </div>
