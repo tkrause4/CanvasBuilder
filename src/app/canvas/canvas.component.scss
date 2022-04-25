@@ -14,11 +14,10 @@ mat-grid-tile {
 .mat-card-title{
     display: block;
     margin-bottom: 8px;
-    position: fixed;
 }
 .card-elements {
     width: 100%;
-    height: 99%;
+    height: 100%;
     font-size: 10px;
     background-color: white;
     color: black;
@@ -45,8 +44,8 @@ mat-flat-button {
     width: 50px;
 }
   
-#x-icon {
-    position: absolute;
-    right: 5%;
-    top: 4%;
+#-icon {
+    position: relative;
+    right: 0px;
+    top: 0px;
 }
