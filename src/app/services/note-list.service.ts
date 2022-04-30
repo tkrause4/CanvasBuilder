@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { TinyliciousClient } from '@fluidframework/tinylicious-client';
+import { SharedMap } from 'fluid-framework';
 import { BehaviorSubject } from 'rxjs';
 import { Note, NoteList } from './note-list';
 
@@ -6,25 +8,28 @@ import { Note, NoteList } from './note-list';
   providedIn: 'root'
 })
 export class NoteListService {
-  noteListSubject = new BehaviorSubject<NoteList>(new Map<number, Note[]>())
+  noteListSubject = new BehaviorSubject<NoteList>({})
+
 
   constructor() {
   }
 
-  saveNote(newNote: Note) {
-    const noteList = this.noteListSubject.value;
-    const tmp: Note[] = [];
 
-    noteList.get(newNote.tile)?.forEach((notes) => {
-      tmp.push(notes)
+
+
+  saveNote(newNote: Note) {
+    const noteList = this.noteListSubject.value as NoteList;
+    const prevNoteList: Note[] = [];
+
+    noteList[newNote.tile]?.forEach((notes) => {
+      prevNoteList.push(notes)
     });
 
-    if (noteList.get(newNote.tile)) {
-      noteList.set(newNote.tile, [...tmp, newNote]);
-    } else {
-      noteList.set(newNote.tile, [newNote]);
-    }
+
+    noteList[newNote.tile] = [...prevNoteList, newNote];
+
     this.noteListSubject.next(noteList);
+
   }
 
   getNoteList() {
