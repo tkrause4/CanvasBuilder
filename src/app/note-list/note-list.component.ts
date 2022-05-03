@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TinyliciousClient } from '@fluidframework/tinylicious-client';
 import { SharedMap } from 'fluid-framework';
-import { Note, NoteList } from '../services/note-list';
+import { Note } from '../services/note-list';
 
 import { NoteListService } from '../services/note-list.service';
 
@@ -12,10 +12,11 @@ import { NoteListService } from '../services/note-list.service';
 })
 export class NoteListComponent implements OnInit {
   private sharedNoteList: SharedMap;
+
   constructor(private noteListService: NoteListService) {
   }
 
-  tileNotes: Note[];
+  tileNotes: Note[] = [];
   @Input() tile: number;
 
   async ngOnInit() {
@@ -23,14 +24,16 @@ export class NoteListComponent implements OnInit {
     this.sharedNoteList = await this.getFluidData();
     this.noteListService.noteListSubject.subscribe((noteList) => {
       this.tileNotes = noteList[this.tile] ?? [];
-      this.sharedNoteList.set(String(this.tile), noteList)
+      this.sharedNoteList.set(String(this.tile), noteList[this.tile])
     })
-    this.sharedNoteList.on('valueChanged', (value: any) => {
-      console.log(value)
+    this.sharedNoteList.on('valueChanged', () => {
+      this.sharedNoteList.forEach((value, key, map) => {
+          this.tileNotes = map.get(String(this.tile)).value;
+      })
+
 
     });
   }
-
 
 
   async getFluidData() {
@@ -44,8 +47,7 @@ export class NoteListComponent implements OnInit {
     const containerId = location.hash.substring(1);
     if (!containerId) {
       ({container} = await client.createContainer(containerSchema));
-      const id = await container.attach();
-      location.hash = id;
+      location.hash = await container.attach();
     } else {
       ({container} = await client.getContainer(containerId, containerSchema));
     }
