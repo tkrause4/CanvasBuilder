@@ -1,4 +1,4 @@
-export type NoteList = Map<number, Note[]>;
+export type NoteList ={[key:number]: Note[]};
 
 export type Note = {
   tile: number

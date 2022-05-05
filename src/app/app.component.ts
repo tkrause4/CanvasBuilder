@@ -10,7 +10,7 @@ interface TimestampDataModel { time: string | undefined; }
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent {
 
   title = 'CanvasBuilder';
   showFiller = false;
@@ -27,46 +27,8 @@ export class AppComponent implements OnInit, OnDestroy {
   localTimestamp: TimestampDataModel | undefined;
   updateLocalTimestamp: (() => void) | undefined;
 
-  async ngOnInit() {
-    this.sharedTimestamp = await this.getFluidData();
-    this.syncData();
-  }
 
-  ngOnDestroy() {
-    this.sharedTimestamp!.off('valueChanged', this.updateLocalTimestamp!);
-  }
 
-  async getFluidData() {
-
-    const client = new TinyliciousClient();
-    const containerSchema = {
-    initialObjects: { sharedTimestamp: SharedMap }
-    };
-
-    let container;
-    const containerId = location.hash.substring(1);
-    if (!containerId) {
-      ({ container } = await client.createContainer(containerSchema));
-      const id = await container.attach();
-      location.hash = id;
-    }
-    else {
-      ({ container } = await client.getContainer(containerId, containerSchema));
-    }
-
-    return container.initialObjects['sharedTimestamp'] as SharedMap;
-
-  }
-
-  syncData() {
-    // Only sync if the Fluid SharedMap object is defined.
-    if (this.sharedTimestamp) {
-      this.updateLocalTimestamp = () => { this.localTimestamp = { time: this.sharedTimestamp!.get("time") } };
-      this.updateLocalTimestamp();
-  
-      this.sharedTimestamp!.on('valueChanged', this.updateLocalTimestamp!);
-    }
-  }
 
   onButtonClick() {
     this.sharedTimestamp?.set('time', Date.now().toString());
