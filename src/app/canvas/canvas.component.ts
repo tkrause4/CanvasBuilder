@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateNoteDialogComponent } from '../create-note-dialog/create-note-dialog.component';
+import { GetApiService } from '../get-api.service';
 
 export interface Tile {
   color: string;
@@ -16,24 +17,34 @@ export interface Tile {
 })
 export class CanvasComponent implements OnInit {
 
-  constructor(private dialog: MatDialog) { }
+  data:any = [];
+  Tile:any =[];
+  
+  tiles: Tile[] = [
+      {text: 'Key Partners', cols: 2, rows: 4, color: 'white'},
+      {text: 'Key Activities', cols: 2, rows: 2, color: 'white'},
+      {text: 'Value Proposition', cols: 2, rows: 4, color: 'white'},
+      {text: 'Customers Relationships', cols: 2, rows: 2, color: 'white'},
+      {text: 'Customer Segments', cols: 2, rows: 4, color: 'white'},
+      {text: 'Key Ressources', cols: 2, rows: 2, color: 'white'},
+      {text: 'Channels', cols: 2, rows: 2, color: 'white'},
+      {text: 'Cost Structure', cols: 5, rows: 2, color: 'white'},
+      {text: 'Revenue Streams', cols: 5, rows: 2, color: 'white'},
+    ];
+    
+  constructor(private dialog: MatDialog, private api:GetApiService) {
+    this.api.getCanvas().subscribe(data=>{
+      console.warn(data);
+      this.data = data;
+      this.Tile = this.data.Tile;
+    })
+   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
+
   createNoteDialog(tileIndex: number) {
     this.dialog.open(CreateNoteDialogComponent, {data: tileIndex});
   }
 
-
-  tiles: Tile[] = [
-    {text: 'Key Partners', cols: 2, rows: 4, color: 'white'},
-    {text: 'Key Activities', cols: 2, rows: 2, color: 'white'},
-    {text: 'Value Proposition', cols: 2, rows: 4, color: 'white'},
-    {text: 'Customers Relationships', cols: 2, rows: 2, color: 'white'},
-    {text: 'Customer Segments', cols: 2, rows: 4, color: 'white'},
-    {text: 'Key Ressources', cols: 2, rows: 2, color: 'white'},
-    {text: 'Channels', cols: 2, rows: 2, color: 'white'},
-    {text: 'Cost Structure', cols: 5, rows: 2, color: 'white'},
-    {text: 'Revenue Streams', cols: 5, rows: 2, color: 'white'},
-  ];
+  
 }

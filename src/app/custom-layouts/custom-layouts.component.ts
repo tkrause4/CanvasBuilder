@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GetApiService } from '../get-api.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-custom-layouts',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomLayoutsComponent implements OnInit {
 
-  constructor() { }
+  title:String = 'This ist the Custom Layout text.';
+  data:any = [];
+  imgsrc:any;
 
-  ngOnInit(): void {
-  }
+  constructor(private api:GetApiService) {
+    this.api.apiCall().subscribe(data=>{
+      console.warn(data);
+      this.data = data;
+    })
+   }
 
+  ngOnInit(): void { }
 }

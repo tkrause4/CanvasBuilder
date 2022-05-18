@@ -49,3 +49,17 @@ mat-flat-button {
     right: 0px;
     top: 0px;
 }
+
+.board_header {
+    text-align: center;
+    height: 100px;
+    margin-top: 15px;
+    margin: 1rem;
+    border: solid 1px #000;
+    display: flex; 
+}
+
+.board_header>p {
+    margin: 20px;
+    font: bold;
+}
