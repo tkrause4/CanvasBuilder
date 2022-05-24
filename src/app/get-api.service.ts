@@ -15,7 +15,8 @@ export class GetApiService {
     return this.http.get('http://localhost:3000/canvases');
   }
 
-  getCanvas(){
-    return this.http.get('http://localhost:3000/canvases/627e751d75d32499d6e733c8')
+  getCanvas(id:String){
+    let url = 'http://localhost:3000/canvases/'+id;
+    return this.http.get(url)
   }
 }

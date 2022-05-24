@@ -59,7 +59,13 @@ mat-flat-button {
     display: flex; 
 }
 
-.board_header>p {
-    margin: 20px;
-    font: bold;
+.title {
+    margin: 50px;
+    font-size: large;
+    line-height: 65px;
+}
+
+mat-form-field {
+    margin-bottom: 20px;
+    margin-right: 30px;
 }

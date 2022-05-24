@@ -28,7 +28,7 @@ import { SidenavMenuComponent } from './sidenav-menu/sidenav-menu.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NoteListComponent } from './note-list/note-list.component';
-
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -62,7 +62,8 @@ import { NoteListComponent } from './note-list/note-list.component';
     MatTooltipModule,
     MatDialogModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatInputModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}

@@ -1,16 +1,16 @@
 <div class="row">
   <div>
     <mat-card class="board_header">
-      <p>{{ data.name }}</p>
-      <p>Titel: <input type="text"></p>
-      <p>Entwickelt von: <input type="text"></p>
-      <p>Datum: <input type="text"></p>
-      <p>Version: <input type="text"></p>
+      <p class="title">{{ data.name }}</p>
+      <p><mat-form-field class="example-full-width" appearance="fill"><mat-label>Titel</mat-label><input matInput></mat-form-field></p>
+      <p><mat-form-field class="example-full-width" appearance="fill"><mat-label>Entwickelt von</mat-label><input matInput></mat-form-field></p>
+      <p><mat-form-field class="example-full-width" appearance="fill"><mat-label>Datum</mat-label><input matInput></mat-form-field></p>
+      <p><mat-form-field class="example-full-width" appearance="fill"><mat-label>Version</mat-label><input matInput></mat-form-field></p>
     </mat-card>
     <div id="content" class="canvas">
-      <mat-grid-list cols="10" rowHeight="10:8" gutterSize="0">
+      <mat-grid-list cols="100" rowHeight="100:70" gutterSize="0">
         <mat-grid-tile
-          *ngFor="let tile of tiles; let i = index"
+          *ngFor="let tile of data.Tile; let i = index"
           [colspan]="tile.cols"
           [rowspan]="tile.rows"
           [style.background]="tile.color"

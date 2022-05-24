@@ -11,7 +11,7 @@ export class CustomLayoutsComponent implements OnInit {
 
   title:String = 'This ist the Custom Layout text.';
   data:any = [];
-  imgsrc:any;
+  canvasId:string;
 
   constructor(private api:GetApiService) {
     this.api.apiCall().subscribe(data=>{
@@ -21,4 +21,9 @@ export class CustomLayoutsComponent implements OnInit {
    }
 
   ngOnInit(): void { }
+
+  createCanvas(canvasId:string){
+    id = canvasId;
+  }
 }
+export let id:string = '628626c472bde9c80d913836';

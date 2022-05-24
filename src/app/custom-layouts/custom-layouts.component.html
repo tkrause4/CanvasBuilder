@@ -5,16 +5,14 @@
         <mat-card-header>
           <mat-card-title>{{num.name}}</mat-card-title>
         </mat-card-header>
-        <img mat-card-image src="../assets/images/empty_content_strategy_canvas.png">
-        <img mat-card-image src="data:image/png;base64,{{num.image.data.data}}">
+        <img mat-card-image src="../assets/images/{{num.imagename}}">
         <mat-card-content>
           <p>
             {{num.name}}
-            {{num.image.data.data}}
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-flat-button color="primary">Canvas erstellen</button>
+          <a routerLink="/"><button mat-flat-button (click)="createCanvas(num._id)" color="primary">Canvas erstellen</button></a>
         </mat-card-actions>
       </mat-card>
     </div>
