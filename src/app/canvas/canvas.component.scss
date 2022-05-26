@@ -1,28 +1,22 @@
 mat-grid-tile {
-    border: solid 1px #000;
+    border: solid 1,5px #000;
   }
 
 .canvas {
-    margin: 1rem;
-    width: calc(100% - 2rem);
-    display: inline-block;
+    margin: auto;
+    width: 90%;
+    display: block;
+    align-items: center;
 }
 
-.row {
-    margin-bottom: 30px;
-}
-.mat-card-title{
-    display: block;
-    margin-bottom: 8px;
-}
 .card-elements {
     width: 100%;
     height: 100%;
     font-size: 10px;
-    background-color: white;
-    color: black;
     overflow-y: hidden;
     overflow-x: auto;
+    box-shadow: none;
+    border: solid 1px #000;
 }
 
 .card-elements-title {
@@ -51,12 +45,11 @@ mat-flat-button {
 }
 
 .board_header {
-    text-align: center;
     height: 100px;
     margin-top: 15px;
-    margin: 1rem;
+    margin-bottom: 10px;
     border: solid 1px #000;
-    display: flex; 
+    display: flex;
 }
 
 .title {
@@ -68,4 +61,11 @@ mat-flat-button {
 mat-form-field {
     margin-bottom: 20px;
     margin-right: 30px;
+}
+
+.mat-card {
+    box-shadow: none;
+}
+
+.content {
 }
