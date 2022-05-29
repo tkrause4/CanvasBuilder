@@ -23,7 +23,10 @@ export class CustomLayoutsComponent implements OnInit {
   ngOnInit(): void { }
 
   createCanvas(canvasId:string){
-    id = canvasId;
+    let localid = canvasId;
+    localStorage.setItem('CanvasID', localid)
+    id = localStorage.getItem('CanvasID') || '';
+    console.log(id);
   }
 }
-export let id:string = '628626c472bde9c80d913836';
+export let id:string = localStorage.getItem('CanvasID') || '';

@@ -18,10 +18,9 @@ export class ToolbarComponent implements OnInit {
 
   public makepdf() {
 
-    html2canvas(document.getElementById("content")!).then(canvas => {
+    html2canvas(document.getElementById("content")!,{scale: 2}).then(canvas => {
 
       const contentDataURL = canvas.toDataURL('image/jpg').replace('image/jpg', 'image/octet-stream');
-      console.log(contentDataURL);
 
       let pdf = new jsPDF('l', 'cm', [80, 43]); // pagesize of PDF
       var width = pdf.internal.pageSize.getWidth();

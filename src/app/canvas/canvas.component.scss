@@ -52,10 +52,8 @@ mat-flat-button {
     display: flex;
 }
 
-.title {
-    margin: 50px;
-    font-size: large;
-    line-height: 65px;
+.board_header>p {
+    margin: auto;
 }
 
 mat-form-field {

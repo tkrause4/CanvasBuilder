@@ -1,11 +1,36 @@
 <div style="height: 92vh;">
   <div id="content" class="canvas">
     <mat-card class="board_header">
-      <p class="title">{{ data.name }}</p>
-      <p><mat-form-field class="example-full-width" appearance="fill"><mat-label>Titel</mat-label><input matInput></mat-form-field></p>
-      <p><mat-form-field class="example-full-width" appearance="fill"><mat-label>Entwickelt von</mat-label><input matInput></mat-form-field></p>
-      <p><mat-form-field class="example-full-width" appearance="fill"><mat-label>Datum</mat-label><input matInput></mat-form-field></p>
-      <p><mat-form-field class="example-full-width" appearance="fill"><mat-label>Version</mat-label><input matInput></mat-form-field></p>
+      <p style="font-size: large; font-size:1vw;">{{ data.name }}</p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <mat-label>Titel</mat-label>
+          <input matInput id="title" value="{{ canvasName }}">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <mat-label>Entwickelt von</mat-label>
+          <input matInput id="publisher" value="{{ canvasPublisher }}">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <mat-label>Datum</mat-label>
+          <input matInput id="date" value="{{ canvasDate }}">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <mat-label>Version</mat-label>
+          <input matInput id="version" value="{{ canvasVersion }}">
+        </mat-form-field>
+      </p>
+      <p>
+        <button mat-icon-button color="primary" (click)="saveHeader()">
+          <mat-icon>check_circle_outline</mat-icon>
+        </button>
+      </p>
     </mat-card>
     <div class="">
       <mat-grid-list cols="100" rowHeight="100:90" gutterSize="4">
