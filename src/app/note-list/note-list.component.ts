@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { TinyliciousClient } from '@fluidframework/tinylicious-client';
 import { SharedMap } from 'fluid-framework';
+import { distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { Note } from '../services/note-list';
 
 import { NoteListService } from '../services/note-list.service';
@@ -10,9 +11,9 @@ import { NoteListService } from '../services/note-list.service';
   templateUrl: './note-list.component.html',
   styleUrls: ['./note-list.component.scss']
 })
-export class NoteListComponent implements OnInit {
+export class NoteListComponent implements OnInit, OnDestroy {
   private sharedNoteList: SharedMap;
-
+  private destroy$ = new Subject();
   constructor(private noteListService: NoteListService) {
   }
 
@@ -20,21 +21,34 @@ export class NoteListComponent implements OnInit {
   @Input() tile: number;
 
   async ngOnInit() {
-
+   
     this.sharedNoteList = await this.getFluidData();
-    this.noteListService.noteListSubject.subscribe((noteList) => {
-      this.tileNotes = noteList[this.tile] ?? [];
-      this.sharedNoteList.set(String(this.tile), noteList[this.tile])
+    this.setTileNotes();
+    this.noteListService.noteSubject
+    .pipe(
+      takeUntil(this.destroy$),
+      distinctUntilChanged()
+    ).subscribe((note) => {
+      if(note.tile === this.tile) {
+        const tmp = this.sharedNoteList.get(String(this.tile)) ?? [];
+        this.sharedNoteList.set(String(note.tile), [...tmp, note]);
+      }
     })
+
     this.sharedNoteList.on('valueChanged', () => {
-      this.sharedNoteList.forEach((value, key, map) => {
-          this.tileNotes = map.get(String(this.tile)).value;
-      })
-
-
+      this.setTileNotes();
     });
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next(null);
+  }
+
+  setTileNotes() {
+    this.sharedNoteList.forEach((value, key, map) => {
+      this.tileNotes = map.get(String(this.tile))?.value ?? [];
+    });
+  }
 
   async getFluidData() {
 
@@ -55,32 +69,4 @@ export class NoteListComponent implements OnInit {
     return container.initialObjects['sharedNoteList'] as SharedMap;
 
   }
-
-  createNode() {
-
-
-    // node1.setAttribute("style", "width:75px; height:75px; font-size:10px; padding:5px; margin-top:5px; overflow:hidden; box-shadow:0px 10px 24px 0px rgba(0,0,0,0.75);");
-    //
-    // node1.style.margin = random_margin[Math.floor(Math.random() * random_margin.length)];
-    // node1.style.transform = random_rotate[Math.floor(Math.random() * random_rotate.length)];
-    // random_color[Math.floor(Math.random() * random_color.length)];
-    //
-    //
-    //
-    // node0.addEventListener("mouseenter", function(){
-    //   node0.style.transform = "scale(1.1)";
-    // })
-    //
-    // node0.addEventListener("mouseleave", function(){
-    //   node0.style.transform = "scale(1)";
-    // })
-    //
-    // node0.addEventListener("dblclick", function(){
-    //   node0.remove();
-    // })
-
-
-  }
-
-
 }
