@@ -17,4 +17,12 @@ export class NoteListService {
     this.noteSubject.next(newNote);
   }
 
+  updateNote(editNote: Note) {
+    this.noteSubject.next(editNote);
+  }
+
+  deleteNote(deleteNote: Note) {
+
+  }
+
 }

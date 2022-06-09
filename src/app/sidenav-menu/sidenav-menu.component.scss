@@ -67,7 +67,7 @@
     border-radius: 30px;
     color: rgba(255, 255, 255, 0.8);
     width: 200px;
-    display: block;
+    display: flex;
     text-decoration: none;
     position: relative;
     text-transform: uppercase;
@@ -75,14 +75,14 @@
     font-size: 0.75rem;
     font-weight: 300;
     padding: 10px 15px;
-    line-height: 1.5rem;
     transition: all .3s ease 0s;
+    align-items: center;
 }
 
 .nav li>a i {
-    width: 20px;
-    margin-right: 10px;
+    margin-right: 20px;
     font-size: 1.125rem;
+    padding-top: 7px;
 }
 
 .nav li>a:hover, .nav li>a:hover i {
@@ -90,13 +90,13 @@
     transition: all .3s ease 0s;
 }
 
-.nav li.active>a:before {
-    content: " ";
-    position: absolute;
-    height: 6px;
-    width: 6px;
-    top: 17px;
-    left: -2px;
-    background: #fff;
-    border-radius: 50%;
-}
+// .nav li.active>a:before {
+//     content: " ";
+//     position: absolute;
+//     height: 6px;
+//     width: 6px;
+//     top: 17px;
+//     left: -2px;
+//     background: #fff;
+//     border-radius: 50%;
+// }

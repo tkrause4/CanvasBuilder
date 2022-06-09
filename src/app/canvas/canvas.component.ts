@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateNoteDialogComponent } from '../create-note-dialog/create-note-dialog.component';
 import { GetApiService } from '../get-api.service';
 import { id } from '../custom-layouts/custom-layouts.component';
+import { CanvasHeader } from '../interfaces/canvas-header'
 
 export interface Tile {
   color: string;
@@ -23,20 +24,27 @@ export class CanvasComponent implements OnInit {
   canvasName:string = localStorage.getItem('canvasName') || '';
   canvasPublisher:string = localStorage.getItem('canvasPublisher') || '';
   canvasDate:string = localStorage.getItem('canvasDate') || '';
-  canvasVersion:string = localStorage.getItem('canvasVersion') || '';  
+  canvasVersion:string = localStorage.getItem('canvasVersion') || '';
+
+  public canvas:CanvasHeader[] = [
+    {canvasName: this.canvasName, 
+    canvasPublisher: this.canvasPublisher,
+    canvasDate: this.canvasDate,
+    canvasVersion: this.canvasVersion},
+  ];
 
   constructor(private dialog: MatDialog, private api:GetApiService) { 
     this.api.getCanvas(this.canvasId).subscribe(data=>{
       console.warn(data);
-      this.data = data;
-      
+      this.data = data; 
     })
   }
 
-  saveHeader() {
+  saveHeader(canvas:CanvasHeader[]) {
     let cname = (<HTMLInputElement>document.getElementById('title')).value;
     localStorage.setItem('canvasName', cname) 
-    this.canvasPublisher = localStorage.getItem('canvasName') || '';
+    this.canvasName = localStorage.getItem('canvasName') || '';
+ 
 
     let cpub = (<HTMLInputElement>document.getElementById('publisher')).value;
     localStorage.setItem('canvasPublisher', cpub) 
@@ -44,11 +52,20 @@ export class CanvasComponent implements OnInit {
 
     let cdate = (<HTMLInputElement>document.getElementById('date')).value;
     localStorage.setItem('canvasDate', cdate) 
-    this.canvasPublisher = localStorage.getItem('canvasDate') || '';
+    this.canvasDate = localStorage.getItem('canvasDate') || '';
 
     let cversion = (<HTMLInputElement>document.getElementById('version')).value;
     localStorage.setItem('canvasVersion', cversion) 
-    this.canvasPublisher = localStorage.getItem('canvasVersion') || '';
+    this.canvasVersion = localStorage.getItem('canvasVersion') || '';
+
+    canvas = [
+      {canvasName: this.canvasName,
+      canvasPublisher: this.canvasPublisher,
+      canvasDate: this.canvasDate,
+      canvasVersion: this.canvasVersion},
+    ];
+
+    console.log(this.canvas)
   }
 
   ngOnInit(): void { }

@@ -20,7 +20,7 @@ mat-grid-tile {
 }
 
 .card-elements-title {
-    font-size: 15px;
+    font-size: 1vw;
 }
 
 #check-icon {
@@ -38,10 +38,11 @@ mat-flat-button {
     width: 50px;
 }
   
-#-icon {
-    position: relative;
+.add-icon {
+    position: absolute;
     right: 0px;
     top: 0px;
+    margin: 7px
 }
 
 .board_header {
@@ -57,14 +58,17 @@ mat-flat-button {
     font-size:1vw;
 }
 
-mat-form-field {
+.mat-form-field {
     margin-bottom: 20px;
     margin-right: 30px;
+    width: 10vw;
+    line-height: normal;
 }
 
 .mat-card {
     box-shadow: none;
 }
 
-.content {
+mat-icon {
+    font-size: 1.4vw;
 }

@@ -27,8 +27,8 @@
         </mat-form-field>
       </p>
       <p>
-        <button mat-icon-button color="primary" (click)="saveHeader()">
-          <mat-icon>check_circle_outline</mat-icon>
+        <button mat-icon-button color="primary" (click)="saveHeader(canvas)">
+          <mat-icon matTooltip="Änderungen speichern">check_circle_outline</mat-icon>
         </button>
       </p>
     </mat-card>
@@ -42,8 +42,8 @@
           <mat-card class="card-elements">
             <mat-card-title class="card-elements-title">
               {{tile.text}}
-              <button mat-icon-button id="add-icon" color="primary" (click)="createNoteDialog(i)">
-                <mat-icon>add_circle_outline</mat-icon>
+              <button mat-icon-button class="add-icon" color="primary" (click)="createNoteDialog(i)">
+                <mat-icon matTooltip="Notiz hinzufügen">add_circle_outline</mat-icon>
               </button>
             </mat-card-title>
             <app-note-list [tile]="i"></app-note-list>

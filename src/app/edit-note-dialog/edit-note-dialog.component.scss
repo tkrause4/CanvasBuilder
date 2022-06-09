@@ -1,0 +1,36 @@
+.card-elements-notes {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    margin-left: 5%;
+  }
+  
+  .container3 {
+    position: absolute;
+    top: 26%;
+    left: 40%;
+  }
+  
+  textarea {
+    outline: none;
+    border: none;
+    width: 250px;
+    height: 250px;
+    padding: 40px 25px 25px 25px;
+  }
+  
+  .test-container {
+    width: 95%;
+    margin: auto;
+  }
+  
+  .header{
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .actions{
+    display: flex;
+    justify-content: end;
+  }

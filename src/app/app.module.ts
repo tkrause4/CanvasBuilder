@@ -29,6 +29,8 @@ import { TemplatesComponent } from './templates/templates.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NoteListComponent } from './note-list/note-list.component';
 import { MatInputModule } from '@angular/material/input';
+import { NoteComponent } from './note/note.component';
+import { EditNoteDialogComponent } from './edit-note-dialog/edit-note-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { MatInputModule } from '@angular/material/input';
     CustomLayoutsComponent,
     TemplatesComponent,
     CreateNoteDialogComponent,
-    NoteListComponent
+    NoteListComponent,
+    NoteComponent,
+    EditNoteDialogComponent
   ],
   imports: [
     BrowserModule,
