@@ -11,8 +11,8 @@ export class GetApiService {
     private http:HttpClient
   ) { }
 
-  apiCall(){
-    return this.http.get('http://localhost:3000/canvases');
+  apiCall(db:string){
+    return this.http.get('http://localhost:3000/'+db);
   }
 
   getCanvas(id:string){

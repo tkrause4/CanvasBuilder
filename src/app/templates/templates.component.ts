@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GetApiService } from '../services/get-api.service';
 
 @Component({
   selector: 'app-templates',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TemplatesComponent implements OnInit {
 
-  constructor() { }
+  data:any = [];
+
+  constructor(private api:GetApiService) {
+    this.api.apiCall('templates').subscribe(data=>{
+      console.warn(data);
+      this.data = data;
+    })
+   }
 
   ngOnInit(): void {
   }

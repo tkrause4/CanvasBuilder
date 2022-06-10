@@ -3,7 +3,6 @@ import { TinyliciousClient } from '@fluidframework/tinylicious-client';
 import { SharedMap } from 'fluid-framework';
 import { distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { Note } from '../services/note-list';
-
 import { NoteListService } from '../services/note-list.service';
 
 @Component({
@@ -11,6 +10,7 @@ import { NoteListService } from '../services/note-list.service';
   templateUrl: './note-list.component.html',
   styleUrls: ['./note-list.component.scss']
 })
+
 export class NoteListComponent implements OnInit, OnDestroy {
   private sharedNoteList: SharedMap;
   private destroy$ = new Subject();

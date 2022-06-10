@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GetApiService } from '../get-api.service';
+import { GetApiService } from '../services/get-api.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -14,7 +14,7 @@ export class CustomLayoutsComponent implements OnInit {
   canvasId:string;
 
   constructor(private api:GetApiService) {
-    this.api.apiCall().subscribe(data=>{
+    this.api.apiCall('canvases').subscribe(data=>{
       console.warn(data);
       this.data = data;
     })
