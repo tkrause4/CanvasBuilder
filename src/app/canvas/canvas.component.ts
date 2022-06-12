@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateNoteDialogComponent } from '../create-note-dialog/create-note-dialog.component';
 import { GetApiService } from '../services/get-api.service';
 import { id } from '../custom-layouts/custom-layouts.component';
 import { SharedMap } from 'fluid-framework';
+import { TinyliciousClient } from '@fluidframework/tinylicious-client';
 
 export interface Tile {
   color: string;
@@ -13,7 +14,7 @@ export interface Tile {
 }
 
 interface HeaderDataModel { 
-  canvasName: string | undefined,
+  canvasName: string | undefined;
   canvasPublisher: string | undefined,
   canvasDate: string | undefined,
   canvasVersion: string | undefined 
@@ -24,14 +25,10 @@ interface HeaderDataModel {
   templateUrl: './canvas.component.html',
   styleUrls: ['./canvas.component.scss']
 })
-export class CanvasComponent implements OnInit {
+export class CanvasComponent implements OnInit, OnDestroy {
 
   data:any = [];
   canvasId:string = id;
-  canvasName:string = '';
-  canvasPublisher:string = '';
-  canvasDate:string = '';
-  canvasVersion:string = '';
 
   constructor(private dialog: MatDialog, private api:GetApiService) { 
     this.api.getCanvas(this.canvasId).subscribe(data=>{
@@ -44,19 +41,59 @@ export class CanvasComponent implements OnInit {
   localHeader: HeaderDataModel | undefined;
   updateHeader: (() => void) | undefined;
 
-  saveHeader() {
-      this.canvasName = (<HTMLInputElement>document.getElementById('title')).value
-      this.canvasName = (<HTMLInputElement>document.getElementById('publisher')).value
-      this.canvasName = (<HTMLInputElement>document.getElementById('date')).value
-      this.canvasName = (<HTMLInputElement>document.getElementById('version')).value
+  async ngOnInit() { 
+    this.sharedHeader = await this.getFluidData();
+    this.syncData(); 
+  } 
 
-      this.sharedHeader?.set('canvasName', this.canvasName);
-      this.sharedHeader?.set('canvasPublisher', this.canvasPublisher);
-      this.sharedHeader?.set('canvasDate', this.canvasDate);
-      this.sharedHeader?.set('canvasVersion', this.canvasVersion);
+  async getFluidData() {
+    const client = new TinyliciousClient();
+    const containerSchema = {
+      initialObjects: {
+        sharedNoteList: SharedMap, 
+        sharedHeader: SharedMap 
+      }
+    };
+
+    let container;
+    const containerId = location.hash.substring(1);
+    if (!containerId) {
+      ({ container } = await client.createContainer(containerSchema));
+      const id = await container.attach();
+      location.hash = id;
+    }
+    else {
+      ({ container } = await client.getContainer(containerId, containerSchema));
+    }
+
+    return container.initialObjects.sharedHeader as SharedMap;
   }
 
-  ngOnInit(): void { }
+  syncData() {
+    if (this.sharedHeader) {
+      this.updateHeader = () => { this.localHeader = { 
+        canvasName: this.sharedHeader!.get("canvasName"),
+        canvasPublisher: this.sharedHeader!.get("canvasPublisher"),
+        canvasDate: this.sharedHeader!.get("canvasDate"),
+        canvasVersion: this.sharedHeader!.get("canvasVersion") 
+      }  
+    };
+      this.updateHeader();
+  
+      this.sharedHeader!.on('valueChanged', this.updateHeader!);
+    }
+  }
+
+  saveHeader() {
+    this.sharedHeader?.set('canvasName', (<HTMLInputElement>document.getElementById('title')).value);
+    this.sharedHeader?.set('canvasPublisher', (<HTMLInputElement>document.getElementById('publisher')).value);
+    this.sharedHeader?.set('canvasDate', (<HTMLInputElement>document.getElementById('date')).value);
+    this.sharedHeader?.set('canvasVersion', (<HTMLInputElement>document.getElementById('version')).value);    
+  }
+  
+  ngOnDestroy() { 
+    this.sharedHeader!.off('valueChanged', this.updateHeader!); 
+  }
 
   createNoteDialog(tileIndex: number) {
     this.dialog.open(CreateNoteDialogComponent, {data: tileIndex});

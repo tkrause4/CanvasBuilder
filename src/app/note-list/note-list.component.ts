@@ -54,7 +54,10 @@ export class NoteListComponent implements OnInit, OnDestroy {
 
     const client = new TinyliciousClient();
     const containerSchema = {
-      initialObjects: {sharedNoteList: SharedMap}
+      initialObjects: {
+        sharedNoteList: SharedMap,
+        sharedHeader: SharedMap
+      }
     };
 
     let container;
