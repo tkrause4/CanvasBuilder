@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GetApiService } from '../services/get-api.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-custom-layouts',
@@ -13,7 +13,7 @@ export class CustomLayoutsComponent implements OnInit {
   data:any = [];
   canvasId:string;
 
-  constructor(private api:GetApiService) {
+  constructor(private api:GetApiService, private router: Router) {
     this.api.apiCall('canvases').subscribe(data=>{
       console.warn(data);
       this.data = data;
@@ -22,11 +22,7 @@ export class CustomLayoutsComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  createCanvas(canvasId:string){
-    let localid = canvasId;
-    localStorage.setItem('CanvasID', localid)
-    id = localStorage.getItem('CanvasID') || '';
-    console.log(id);
+  createCanvas2(canvasId:string){
+    this.router.navigate(['/'], { queryParams: { workspace: canvasId } });
   }
 }
-export let id:string = localStorage.getItem('CanvasID') || '';

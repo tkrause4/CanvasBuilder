@@ -1,10 +1,10 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateNoteDialogComponent } from '../create-note-dialog/create-note-dialog.component';
 import { GetApiService } from '../services/get-api.service';
-import { id } from '../custom-layouts/custom-layouts.component';
 import { SharedMap } from 'fluid-framework';
 import { TinyliciousClient } from '@fluidframework/tinylicious-client';
+import { ActivatedRoute } from '@angular/router';
 
 export interface Tile {
   color: string;
@@ -28,14 +28,12 @@ interface HeaderDataModel {
 export class CanvasComponent implements OnInit, OnDestroy {
 
   data:any = [];
-  canvasId:string = id;
+  canvasId:string;
 
-  constructor(private dialog: MatDialog, private api:GetApiService) { 
-    this.api.getCanvas(this.canvasId).subscribe(data=>{
-      console.warn(data);
-      this.data = data; 
-    })
-  }
+  constructor(
+    private dialog: MatDialog, 
+    private api:GetApiService,
+    private route: ActivatedRoute) { }
 
   sharedHeader: SharedMap | undefined;
   localHeader: HeaderDataModel | undefined;
@@ -44,6 +42,17 @@ export class CanvasComponent implements OnInit, OnDestroy {
   async ngOnInit() { 
     this.sharedHeader = await this.getFluidData();
     this.syncData(); 
+
+    this.route.queryParams.subscribe(params => {
+      console.log(params);
+      this.canvasId = params.workspace;
+      console.log(this.canvasId)
+    })
+
+    this.api.getCanvas(this.canvasId).subscribe(data=>{
+        console.warn(data);
+        this.data = data; 
+    })
   } 
 
   async getFluidData() {

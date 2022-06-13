@@ -31,4 +31,12 @@ export class ToolbarComponent implements OnInit {
 
     });
   }
+
+  copyURL() {
+    var inputc = document.body.appendChild(<HTMLInputElement>document.createElement("input"));
+    inputc.value = window.location.href;
+    inputc.focus();
+    inputc.select();
+    document.execCommand('copy');
+  }
 }
