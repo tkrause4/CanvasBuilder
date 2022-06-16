@@ -1,0 +1,32 @@
+<mat-card class="board_header">
+    <p style="font-size: large; font-size:1vw;">{{ data.name }}</p>
+    <p>
+      <mat-form-field class="example-full-width">
+        <mat-label>Titel</mat-label>
+        <input matInput id="title" value="{{ localHeader?.canvasName }}">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="example-full-width">
+        <mat-label>Entwickelt von</mat-label>
+        <input matInput id="publisher" value="{{ localHeader?.canvasPublisher }}">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="example-full-width">
+        <mat-label>Datum</mat-label>
+        <input matInput id="date" value="{{ localHeader?.canvasDate }}">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="example-full-width">
+        <mat-label>Version</mat-label>
+        <input matInput id="version" value="{{ localHeader?.canvasVersion }}">
+      </mat-form-field>
+    </p>
+    <p>
+      <button mat-icon-button color="primary" (click)="saveHeader()">
+        <mat-icon matTooltip="Änderungen speichern">check_circle_outline</mat-icon>
+      </button>
+    </p>
+  </mat-card>

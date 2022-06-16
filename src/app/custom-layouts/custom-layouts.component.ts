@@ -22,7 +22,7 @@ export class CustomLayoutsComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  createCanvas2(canvasId:string){
-    this.router.navigate(['/'], { queryParams: { workspace: canvasId } });
+  createCanvas(canvasId:string){
+    this.router.navigate(['/'], { queryParams: { type: 'canvases', workspace: canvasId } });
   }
 }

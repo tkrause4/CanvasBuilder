@@ -7,8 +7,8 @@
   <button mat-icon-button class="example-icon favorite-icon" (click)=makepdf()>
     <mat-icon matTooltip="Als PDF speichern">download</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon favorite-icon">
-    <mat-icon>favorite</mat-icon>
+  <button mat-icon-button class="example-icon favorite-icon" (click)="generateQR()">
+    <mat-icon matTooltip="Generate QR-Code">qr_code</mat-icon>
   </button>
   <button mat-icon-button class="example-icon">
     <mat-icon matTooltip="Link kopieren" (click)="copyURL();">share</mat-icon>

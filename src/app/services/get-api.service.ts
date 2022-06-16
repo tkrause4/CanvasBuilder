@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GetApiService {
 
+  db:string = "http://localhost:3000/";
+
   constructor(
     private http:HttpClient
   ) { }
@@ -15,8 +17,8 @@ export class GetApiService {
     return this.http.get('http://localhost:3000/'+db);
   }
 
-  getCanvas(id:string){
-    let url = 'http://localhost:3000/canvases/'+id;
+  getCanvas(id:string, type:string){
+    let url = this.db + type + '/' + id;
     return this.http.get(url)
   }
 }

@@ -23,6 +23,10 @@ mat-grid-tile {
     font-size: 1vw;
 }
 
+.card-elements-title-box {
+    font-size: 1vw;
+}
+
 #check-icon {
     position: absolute;
     right: 17%;
@@ -45,19 +49,6 @@ mat-flat-button {
     margin: 7px
 }
 
-.board_header {
-    height: 100px;
-    margin-top: 15px;
-    margin-bottom: 10px;
-    border: solid 1px #000;
-    display: flex;
-}
-
-.board_header>p {
-    margin: auto;
-    font-size:1vw;
-}
-
 .mat-form-field {
     margin-bottom: 20px;
     margin-right: 30px;
@@ -71,4 +62,10 @@ mat-flat-button {
 
 mat-icon {
     font-size: 1.4vw;
+}
+
+.tile-header {
+    width: 200px;
+    background-color: rgb(241, 241, 241);
+    border-radius: 5px;
 }

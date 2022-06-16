@@ -1,17 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
+import { GenerateQrComponent } from '../generate-qr/generate-qr.component';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
+
 export class ToolbarComponent implements OnInit {
   @Input() inputSideNav: MatSidenav;
 
-  constructor() { }
+  constructor(public dialog: MatDialog) {
+   }
 
   ngOnInit(): void {
   }
@@ -38,5 +42,12 @@ export class ToolbarComponent implements OnInit {
     inputc.focus();
     inputc.select();
     document.execCommand('copy');
+    inputc.parentNode?.removeChild(inputc);
+  }
+
+  generateQR() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.position = {top:'60px', right:'10px'}
+    this.dialog.open(GenerateQrComponent, dialogConfig);
   }
 }

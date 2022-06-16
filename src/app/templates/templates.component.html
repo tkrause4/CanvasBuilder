@@ -12,7 +12,7 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <a routerLink="/"><button mat-flat-button color="primary">Canvas erstellen</button></a>
+          <button mat-flat-button color="primary" (click)="createCanvas(num._id)">Canvas erstellen</button>
         </mat-card-actions>
       </mat-card>
     </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GetApiService } from '../services/get-api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-templates',
@@ -10,7 +11,7 @@ export class TemplatesComponent implements OnInit {
 
   data:any = [];
 
-  constructor(private api:GetApiService) {
+  constructor(private api:GetApiService, private router: Router) {
     this.api.apiCall('templates').subscribe(data=>{
       console.warn(data);
       this.data = data;
@@ -18,6 +19,10 @@ export class TemplatesComponent implements OnInit {
    }
 
   ngOnInit(): void {
+  }
+
+  createCanvas(canvasId:string){
+    this.router.navigate(['/'], { queryParams: { type: 'templates', workspace: canvasId } });
   }
 
 }

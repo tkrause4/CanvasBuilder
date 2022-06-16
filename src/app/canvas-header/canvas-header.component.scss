@@ -1,0 +1,16 @@
+.board_header {
+    height: 100px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border: solid 1px #000;
+    display: flex;
+}
+
+.board_header>p {
+    margin: auto;
+    font-size:1vw;
+}
+
+mat-icon {
+    font-size: 1.4vw;
+}

@@ -23,7 +23,6 @@ import { AppComponent } from './app.component';
 import { CanvasComponent } from './canvas/canvas.component';
 import { CreateNoteDialogComponent } from './create-note-dialog/create-note-dialog.component';
 import { CustomLayoutsComponent } from './custom-layouts/custom-layouts.component';
-import { MenuComponent } from './menu/menu.component';
 import { SidenavMenuComponent } from './sidenav-menu/sidenav-menu.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -31,11 +30,14 @@ import { NoteListComponent } from './note-list/note-list.component';
 import { MatInputModule } from '@angular/material/input';
 import { NoteComponent } from './note/note.component';
 import { EditNoteDialogComponent } from './edit-note-dialog/edit-note-dialog.component';
+import { CanvasHeaderComponent } from './canvas-header/canvas-header.component';
+import { GenerateQrComponent } from './generate-qr/generate-qr.component';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent,
     SidenavMenuComponent,
     ToolbarComponent,
     CanvasComponent,
@@ -44,7 +46,9 @@ import { EditNoteDialogComponent } from './edit-note-dialog/edit-note-dialog.com
     CreateNoteDialogComponent,
     NoteListComponent,
     NoteComponent,
-    EditNoteDialogComponent
+    EditNoteDialogComponent,
+    CanvasHeaderComponent,
+    GenerateQrComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +71,8 @@ import { EditNoteDialogComponent } from './edit-note-dialog/edit-note-dialog.com
     MatDialogModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatInputModule
+    MatInputModule,
+    NgxQRCodeModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
