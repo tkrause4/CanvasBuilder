@@ -56,7 +56,8 @@ export class NoteListComponent implements OnInit, OnDestroy {
     const containerSchema = {
       initialObjects: {
         sharedNoteList: SharedMap,
-        sharedHeader: SharedMap
+        sharedHeader: SharedMap,
+        sharedTitles: SharedMap
       }
     };
 

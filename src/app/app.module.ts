@@ -33,6 +33,7 @@ import { EditNoteDialogComponent } from './edit-note-dialog/edit-note-dialog.com
 import { CanvasHeaderComponent } from './canvas-header/canvas-header.component';
 import { GenerateQrComponent } from './generate-qr/generate-qr.component';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { StartscreenComponent } from './startscreen/startscreen.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
     NoteComponent,
     EditNoteDialogComponent,
     CanvasHeaderComponent,
-    GenerateQrComponent
+    GenerateQrComponent,
+    StartscreenComponent
   ],
   imports: [
     BrowserModule,

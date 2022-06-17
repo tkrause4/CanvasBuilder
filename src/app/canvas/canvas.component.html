@@ -1,5 +1,5 @@
 <div style="height: 92vh;">
-  <div id="content" class="canvas">
+  <div id="content" class="canvas" *ngIf="type != undefined">
     <app-canvas-header [data]="data"></app-canvas-header>
     <div>
       <mat-grid-list cols="100" rowHeight="100:90" gutterSize="4">
@@ -16,7 +16,7 @@
               </button>
             </mat-card-title>
             <mat-card-title *ngIf="data.type == 'Template'" class="card-elements-title-box">
-                <input class="tile-header" matInput id="{{i}}" value="Hi">
+                <input class="tile-header" matInput id="{{i}}" value="">
               <button mat-icon-button class="add-icon" color="primary" (click)="createNoteDialog(i)">
                 <mat-icon matTooltip="Notiz hinzufügen">add_circle_outline</mat-icon>
               </button>
@@ -27,4 +27,6 @@
       </mat-grid-list>
     </div>
   </div>
+  <app-startscreen *ngIf="type == undefined"></app-startscreen>
 </div>
+

@@ -34,7 +34,8 @@ export class CanvasHeaderComponent implements OnInit {
     const containerSchema = {
       initialObjects: {
         sharedNoteList: SharedMap, 
-        sharedHeader: SharedMap 
+        sharedHeader: SharedMap,
+        sharedTitles: SharedMap
       }
     };
 
