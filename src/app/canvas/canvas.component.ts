@@ -54,8 +54,8 @@ export class CanvasComponent implements OnInit {
       }  
 
       if (this.type == 'templates') {
-         this.sharedTitles = await this.getFluidData();
-         this.syncData();
+        //  this.sharedTitles = await this.getFluidData();
+        //  this.syncData();
       }
   } 
 
@@ -105,7 +105,7 @@ export class CanvasComponent implements OnInit {
   }
   
   ngOnDestroy() { 
-    this.sharedTitles!.off('valueChanged', this.updatelocalTitles!); 
+    // this.sharedTitles!.off('valueChanged', this.updatelocalTitles!); 
   }
 
   createNoteDialog(tileIndex: number) {
