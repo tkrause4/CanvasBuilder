@@ -1,10 +1,10 @@
 <div class="header">
   <h2 mat-dialog-title>Notiz bearbeiten</h2>
   <div class="actions">
-    <button mat-dialog-close="true" matTooltip="Notiz löschen" id="x-icon" mat-icon-button color="primary" (click)="deleteNote(note)">
+    <button mat-dialog-close="true" matTooltip="Notiz löschen" id="x-icon" mat-icon-button color="primary" (click)="deleteNote()">
       <mat-icon>delete</mat-icon>
     </button>  
-    <button matTooltip="Speichern" id="check-icon" mat-icon-button color="primary" mat-dialog-close="true" (click)="editNote(note)">
+    <button matTooltip="Speichern" id="check-icon" mat-icon-button color="primary" mat-dialog-close="true" (click)="editNote()">
       <mat-icon>save</mat-icon>
     </button>
     <button mat-dialog-close="true" matTooltip="Abbruch" id="x-icon" mat-icon-button color="primary">
@@ -14,5 +14,5 @@
 </div>
   
   <mat-dialog-content>
-    <textarea [(ngModel)]="note" id="note-text" placeholder="{{note.text}}" maxlength="96">{{note.text}}</textarea>
+    <textarea [(ngModel)]="data.noteText" id="note-text" maxlength="96">{{data.noteText}}</textarea>
   </mat-dialog-content>

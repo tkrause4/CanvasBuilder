@@ -17,12 +17,21 @@ export class NoteListService {
     this.noteSubject.next(newNote);
   }
 
-  updateNote(editNote: Note) {
-    this.noteSubject.next(editNote);
+  updateNote(editNote: Note, tileNotes: Note[]) {
+    for (let i = 0; i < tileNotes.length; i++){
+      if (editNote.id == tileNotes[i].id){
+        tileNotes[i].text = editNote.text;
+      }
+    }
   }
 
-  deleteNote(deleteNote: Note) {
-
+  deleteNote(deleteNote: String, tileNotes:Note[]) {
+    for (let i = 0; i < tileNotes.length; i++){
+      if (deleteNote == tileNotes[i].id){
+        tileNotes.splice(i,1);
+        i--;
+      }
+    }
   }
 
 }

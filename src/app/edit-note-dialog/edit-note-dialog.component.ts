@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Note } from '../services/note-list';
+import { Note, NoteList } from '../services/note-list';
 import { NoteListService } from '../services/note-list.service';
 
 @Component({
@@ -18,20 +18,23 @@ export class EditNoteDialogComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  public editNote(note: Note) {
+  public editNote() {
     this.noteListService.updateNote({
-      id: note.id,
-      tile: note.tile,
-      text: note.text,
+      id: this.data.noteID,
+      tile: this.data.noteTile,
+      text: this.data.noteText,
       styles: {
-        color: note.styles.color,
-        margin: note.styles.margin,
-        rotate: note.styles.rotate
+        color: this.data.noteColor,
+        margin: this.data.noteMargin,
+        rotate: this.data.noteRotate
       }
-    });
+    },
+    this.data.tileNotes
+    );
+    
   }
 
-  public deleteNote(note: Note) {
-    this.noteListService.deleteNote(note)
+  public deleteNote() {
+    this.noteListService.deleteNote(this.data.noteID, this.data.tileNotes)
   }
 }

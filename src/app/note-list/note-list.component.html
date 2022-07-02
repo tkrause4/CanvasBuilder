@@ -1,1 +1,4 @@
-<app-note [tileNotes]="tileNotes"></app-note>
+<app-note 
+    [tileNotes]="tileNotes"
+    (event)="setDataFromNote($event)">
+</app-note>

@@ -12,13 +12,18 @@ import { NoteListService } from '../services/note-list.service';
 })
 
 export class NoteListComponent implements OnInit, OnDestroy {
-  private sharedNoteList: SharedMap;
+  sharedNoteList: SharedMap;
   private destroy$ = new Subject();
   constructor(private noteListService: NoteListService) {
   }
 
   tileNotes: Note[] = [];
   @Input() tile: number;
+
+  public setDataFromNote(data: Note[]) {
+    this.tileNotes = data;
+    this.setTileNotes(); 
+  }
 
   async ngOnInit() {
    
@@ -51,7 +56,6 @@ export class NoteListComponent implements OnInit, OnDestroy {
   }
 
   async getFluidData() {
-
     const client = new TinyliciousClient();
     const containerSchema = {
       initialObjects: {
