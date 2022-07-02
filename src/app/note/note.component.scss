@@ -13,12 +13,12 @@
     padding: 5px;
     overflow: hidden;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.75);
+    transition: 0.3s;
+    font-size:0.6vw;
   }
 
   .note:hover {
-    transform: scale(1.5);
-  }
-  
-  .note>p {
-    font-size:0.6vw;
+    width: 4.5vw;
+    height: 4.5vw;
+    font-size: 0.8vw;
   }
