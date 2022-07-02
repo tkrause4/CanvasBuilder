@@ -1,3 +1,4 @@
+import { keyframes } from '@angular/animations';
 import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { TinyliciousClient } from '@fluidframework/tinylicious-client';
 import { SharedMap } from 'fluid-framework';
@@ -22,7 +23,7 @@ export class NoteListComponent implements OnInit, OnDestroy {
 
   public setDataFromNote(data: Note[]) {
     this.tileNotes = data;
-    this.setTileNotes(); 
+    this.sharedNoteList.set(this.tile.toString(), this.tileNotes);
   }
 
   async ngOnInit() {
