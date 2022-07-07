@@ -1,8 +1,5 @@
-import { Component, ViewChild, ElementRef, OnInit, OnDestroy } from '@angular/core';
-import { SharedMap } from "fluid-framework";
-import { TinyliciousClient } from '@fluidframework/tinylicious-client';
-
-interface TimestampDataModel { time: string | undefined; }
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FluidDataService } from './services/fluid-data.service';
 
 @Component({
   selector: 'app-root',
@@ -10,28 +7,18 @@ interface TimestampDataModel { time: string | undefined; }
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   title = 'CanvasBuilder';
-  showFiller = false;
-  selectedMenu:any='Home';
+
   @ViewChild('content', {static: false}) el!: ElementRef;
-  textvalue:string = '';
 
-  goTo(paramText:string){
-    this.selectedMenu = paramText
+  constructor(private fluidDataService: FluidDataService) {
   }
 
-  sharedTimestamp: SharedMap | undefined;
-  sharedNotes: SharedMap | undefined;
-  localTimestamp: TimestampDataModel | undefined;
-  updateLocalTimestamp: (() => void) | undefined;
-
-
-
-
-  onButtonClick() {
-    this.sharedTimestamp?.set('time', Date.now().toString());
+  async ngOnInit() {
+    await this.fluidDataService.initData();
   }
+
 
 }

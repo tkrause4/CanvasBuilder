@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SharedMap } from 'fluid-framework';
-import { TinyliciousClient } from '@fluidframework/tinylicious-client';
+import { FluidDataService } from '../services/fluid-data.service';
 
-interface HeaderDataModel { 
-  canvasName: string | undefined;
+interface HeaderDataModel {
+  canvasName: string | undefined,
   canvasPublisher: string | undefined,
   canvasDate: string | undefined,
-  canvasVersion: string | undefined 
+  canvasVersion: string | undefined
 }
 
 @Component({
@@ -16,67 +16,45 @@ interface HeaderDataModel {
 })
 export class CanvasHeaderComponent implements OnInit {
 
-  @Input() data:any = [];
+  @Input() data: any = [];
 
-  constructor() { }
-
-  sharedHeader: SharedMap | undefined;
-  localHeader: HeaderDataModel | undefined;
-  updateHeader: (() => void) | undefined;
-
-  async ngOnInit() { 
-    this.sharedHeader = await this.getFluidData();
-    this.syncData();
-  } 
-
-  async getFluidData() {
-    const client = new TinyliciousClient();
-    const containerSchema = {
-      initialObjects: {
-        sharedNoteList: SharedMap, 
-        sharedHeader: SharedMap,
-        sharedTitles: SharedMap
-      }
-    };
-
-    let container;
-    const containerId = location.hash.substring(1);
-    if (!containerId) {
-      ({ container } = await client.createContainer(containerSchema));
-      const id = await container.attach();
-      location.hash = id;
-    }
-    else {
-      ({ container } = await client.getContainer(containerId, containerSchema));
-    }
-
-    return container.initialObjects.sharedHeader as SharedMap;
+  constructor(private fluidDataService: FluidDataService) {
   }
 
-  syncData() {
-    if (this.sharedHeader) {
-      this.updateHeader = () => { this.localHeader = { 
-        canvasName: this.sharedHeader!.get("canvasName"),
-        canvasPublisher: this.sharedHeader!.get("canvasPublisher"),
-        canvasDate: this.sharedHeader!.get("canvasDate"),
-        canvasVersion: this.sharedHeader!.get("canvasVersion") 
-      }  
-    };
-      this.updateHeader();
-  
-      this.sharedHeader!.on('valueChanged', this.updateHeader!);
-    }
+  sharedHeader: SharedMap | undefined;
+  localHeader: HeaderDataModel = {
+    canvasName: '',
+    canvasDate:'',
+    canvasPublisher:'',
+    canvasVersion:''
+  };
+  updateHeader: (() => void) | undefined;
+
+  async ngOnInit() {
+    this.fluidDataService.sharedHeader$.subscribe((sharedHeader)=>{
+
+      this.localHeader = {
+        canvasName: sharedHeader!.get("canvasName"),
+        canvasPublisher: sharedHeader!.get("canvasPublisher"),
+        canvasDate: sharedHeader!.get("canvasDate"),
+        canvasVersion: sharedHeader!.get("canvasVersion")
+      }
+    })
   }
 
   saveHeader() {
-    this.sharedHeader?.set('canvasName', (<HTMLInputElement>document.getElementById('title')).value);
-    this.sharedHeader?.set('canvasPublisher', (<HTMLInputElement>document.getElementById('publisher')).value);
-    this.sharedHeader?.set('canvasDate', (<HTMLInputElement>document.getElementById('date')).value);
-    this.sharedHeader?.set('canvasVersion', (<HTMLInputElement>document.getElementById('version')).value);    
+    const map = new Map<string, any>();
+
+    map.set('canvasName', this.localHeader?.canvasName);
+    map.set('canvasPublisher', this.localHeader?.canvasPublisher);
+    map.set('canvasDate', this.localHeader?.canvasDate);
+    map.set('canvasVersion', this.localHeader?.canvasVersion);
+
+    this.fluidDataService.sharedHeader$.next(map);
   }
-  
-  ngOnDestroy() { 
-    this.sharedHeader!.off('valueChanged', this.updateHeader!); 
+
+  ngOnDestroy() {
+    this.sharedHeader!.off('valueChanged', this.updateHeader!);
   }
 
 }

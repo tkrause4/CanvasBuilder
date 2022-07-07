@@ -1,8 +1,6 @@
-import { keyframes } from '@angular/animations';
-import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { TinyliciousClient } from '@fluidframework/tinylicious-client';
-import { SharedMap } from 'fluid-framework';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { distinctUntilChanged, Subject, takeUntil } from 'rxjs';
+import { FluidDataService } from '../services/fluid-data.service';
 import { Note } from '../services/note-list';
 import { NoteListService } from '../services/note-list.service';
 
@@ -13,9 +11,10 @@ import { NoteListService } from '../services/note-list.service';
 })
 
 export class NoteListComponent implements OnInit, OnDestroy {
-  sharedNoteList: SharedMap;
+
   private destroy$ = new Subject();
-  constructor(private noteListService: NoteListService) {
+  constructor(private noteListService: NoteListService,
+              private fluidDataService: FluidDataService) {
   }
 
   tileNotes: Note[] = [];
@@ -23,12 +22,11 @@ export class NoteListComponent implements OnInit, OnDestroy {
 
   public setDataFromNote(data: Note[]) {
     this.tileNotes = data;
-    this.sharedNoteList.set(this.tile.toString(), this.tileNotes);
+    this.fluidDataService.sharedNoteList$.next(new Map().set(this.tile.toString(), this.tileNotes));
   }
 
   async ngOnInit() {
-   
-    this.sharedNoteList = await this.getFluidData();
+
     this.setTileNotes();
     this.noteListService.noteSubject
     .pipe(
@@ -36,14 +34,9 @@ export class NoteListComponent implements OnInit, OnDestroy {
       distinctUntilChanged()
     ).subscribe((note) => {
       if(note.tile === this.tile) {
-        const tmp = this.sharedNoteList.get(String(this.tile)) ?? [];
-        this.sharedNoteList.set(String(note.tile), [...tmp, note]);
+        this.fluidDataService.sharedNoteList$.next(new Map().set(String(note.tile), [...this.tileNotes, note]));
       }
     })
-
-    this.sharedNoteList.on('valueChanged', () => {
-      this.setTileNotes();
-    });
   }
 
   ngOnDestroy(): void {
@@ -51,31 +44,9 @@ export class NoteListComponent implements OnInit, OnDestroy {
   }
 
   setTileNotes() {
-    this.sharedNoteList.forEach((value, key, map) => {
-      this.tileNotes = map.get(String(this.tile))?.value ?? [];
-    });
+    this.fluidDataService.sharedNoteList$.subscribe((sharedNoteList)=>{
+      this.tileNotes = sharedNoteList.get(String(this.tile)) ?? [];
+    })
   }
 
-  async getFluidData() {
-    const client = new TinyliciousClient();
-    const containerSchema = {
-      initialObjects: {
-        sharedNoteList: SharedMap,
-        sharedHeader: SharedMap,
-        sharedTitles: SharedMap
-      }
-    };
-
-    let container;
-    const containerId = location.hash.substring(1);
-    if (!containerId) {
-      ({container} = await client.createContainer(containerSchema));
-      location.hash = await container.attach();
-    } else {
-      ({container} = await client.getContainer(containerId, containerSchema));
-    }
-
-    return container.initialObjects['sharedNoteList'] as SharedMap;
-
-  }
 }
